@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Scaling Retrieval-Based Language Models with a Trillion-Token Datastore">
+  <meta name="keywords" content="scaling retrieval-based language models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scaling Retrieval-Based Language Models with a Trillion-Token Datastore</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Scaling Retrieval-Based Language Models with a Trillion-Token Datastore</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://rulinshao.github.io/">Rulin Shao</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jacqueline-he.github.io/">Jacqueline He</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://akariasai.github.io">Akari Asai</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://swj0419.github.io/">Weijia Shi</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://timdettmers.com/">Tim Dettmers</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.sewonmin.com/">Sewon Min</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.washington.edu/people/faculty/lsz">Luke Zettlemoyer</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://koh.pw/">Pang Wei Koh</a><sup>12</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Washington,</span>
+            <span class="author-block"><sup>2</sup>Allen Institute for AI</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1FDtWyJTwgyk-CRg6L8Syi6WEuBZrgytE/view?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/RulinShao/retrieval-scaling"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/rulins/MassiveDS-1.4T"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <img src="static/images/scaling_gif.gif" alt="Datastore Scaling.">
+        <br>
+        <br>
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Scaling laws with respect to the amount of training data and the number of parameters allow us to predict the cost-benefit trade-offs of pretraining language models (LMs) in different configurations. 
+            In this paper, we consider another dimension of scaling: the amount of data available at <i>inference</i> time.
+            Specifically, we find that increasing the size of the datastore used by a retrieval-based LM monotonically improves language modeling and several downstream tasks without obvious saturation, 
+            such that a smaller model augmented with a large datastore outperforms a larger LM-only model on knowledge-intensive tasks.
+            By plotting compute-optimal scaling curves with varied datastore, model, and pretraining data sizes, we show that using larger datastores can significantly improve model performance for the same training compute budget.
+          </p>
+          <p>
+            We carry out our study by constructing a 1.4 trillion-token datastore named MassiveDS, which is the largest and the most diverse open-sourced datastore for retrieval-based LMs to date, and designing an efficient pipeline for studying datastore scaling in a computationally accessible manner.
+            Finally, we analyze the effect of improving the retriever, datastore quality filtering, and other design choices on our observed scaling trends. 
+            Overall, our results show that datastore size should be considered as an integral part of LM efficiency and performance trade-offs. 
+            To facilitate future research, we open-source all artifacts.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">MassiveDS and our Datastore Scaling Pipeline</h2>
+          <div class="content has-text-justified">
+            <p>
+            <b>MassiveDS</b> MassiveDS is constructed from diverse data sources including both domain-specific data and massive web data,  so that it can benefit a wide range of tasks.
+            <img src="static/images/massiveds.png" alt="MassiveDS overview.">
+            </p>
+            <p>
+            We also designed an efficient scaling experiment pipeline that lets us understand scaling trends on an academic budget. The key idea is to reorder the operations to make the repeated ones cheaper. We prove its equivalence to the naive implementation.
+            <img src="static/images/pipeline.png" alt="Pipeline overview.">
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </section>
+  </div>
+    <!--/ Abstract. -->
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Results and Analysis</h2>
+          <div class="content has-text-justified">
+            <h4 class="title is-3">Datastore Scaling</h4>
+            <p>
+              Previous work has shown scaling datastore is helpful for language modeling, while it remains unknown how it applies to downstream tasks. We show MassiveDS not only helps language modeling but also downstream tasks including MMLU.
+            </p>
+            <img src="static/images/datastore_scaling_results.png" alt="Datastore Scaling overview.">
+          </div>
+          <div class="content has-text-justified">
+            <h4 class="title is-3">Compute-Optimal Scaling</h4>
+            <p>
+              We find using larger datastores can significantly improve performance for the same training compute. Figure 4 shows compute-optimal scaling curves with OLMo and Pythia on 4 downstream tasks.
+            </p>
+            <img src="static/images/compute_optimal_scaling_results.png" alt="Compute-Optimal Scaling overview.">
+          </div>
+          <div class="content has-text-justified">
+            <h4 class="title is-3">Retriever is Robust to Out-of-Distribution (OOD) Data in the Datastore</h4>
+            <p>
+              We compare the performance of MassiveDS with single-domain datastores in Table 3. The results show that MassiveDS matches or outperforms all single-domain datastores.
+            </p>
+            <img src="static/images/single_comain_comparison.png" alt="Single Domain overview.">
+            <p>
+              We further investigate the source of this robustness and found that the retriever tend to retrieve more the relevant domain depite the the existance of a large amout of OOD data.
+            </p>
+            <img src="static/images/retrieval_distribution.png" alt="Retrieval Distribution overview.">
+          </div>
+          <div class="content has-text-justified">
+            <h4 class="title is-3">Analysis on the Impact of Reranker and Data Contamination</h4>
+            <p>
+              Scaling trends can be improved with advanced retrieval, such as reranking. Also, data contamination has a large impact on language modeling evaluation, so we advocate applying strict decontamination for RAG perplexity evaluation.
+            </p>
+            <img src="static/images/analysis.png" alt="Analysis overview.">
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Reprduction and Datastore</h2>
+          <div class="content has-text-justified">
+            <p>
+            All code is available at <a href="https://github.com/RulinShao/retrieval-scaling">Github</a>, and all datastore artifacts are available at <a href="https://huggingface.co/datasets/rulins/MassiveDS-1.4T">Huggingface Space</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{shao2024scaling,
+  author = {Shao, Rulin and He, Jacqueline and Asai, Akari and Shi, Weijia and Dettmers, Tim and Min, Sewon and Zettlemoyer, Luke and Koh, Pang Wei},
+  title  = {Scaling Retrieval-Based Language Models with a Trillion-Token Datastore},
+  year   = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Template adopted from the <a
+              href="https://github.com/nerfies/nerfies.github.io">nerfies project</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
