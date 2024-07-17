@@ -178,7 +178,7 @@
       <!--/ Abstract. -->
     </section>
   </div>
-    <!--/ Abstract. -->
+    <!--/ Results and Analysis. -->
     <div class="container is-max-desktop">
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
@@ -200,26 +200,52 @@
           </div>
           <h2 class="title is-3">Analysis</h2>
           <div class="content has-text-justified">
-            <h4 class="title is-4">Retriever is Robust to Out-of-Distribution (OOD) Data in the Datastore</h4>
+            <h4 class="title is-4">Retriever is Robust to Out-of-Distribution Data in the Datastore</h4>
             <p>
               We compare the performance of MassiveDS with single-domain datastores in Table 3. The results show that MassiveDS matches or outperforms all single-domain datastores.
             </p>
             <img src="static/images/single_comain_comparison.png" alt="Single Domain overview.">
             <p>
-              We further investigate the source of this robustness and found that the retriever tend to retrieve more the relevant domain depite the the existance of a large amout of OOD data.
+              We further investigate the source of this robustness and find that the retriever tends to retrieve more from the relevant domain depite the the existance of a large amout of out-of-distribution data, as shown in Figure 5. 
             </p>
             <img src="static/images/retrieval_distribution.png" alt="Retrieval Distribution overview." width="400" style="display: block; margin-left: auto; margin-right: auto;">
+            <p>
+              Overall, these results show that retrieving from broad datastores like MassiveDS can simultaneously improve performance across multiple domains, paving the path towards general-purpose retrieval-based models.
+            </p>
           </div>
           <div class="content has-text-justified">
             <h4 class="title is-4">Analysis on the Impact of Reranker and Data Contamination</h4>
             <p>
-              Scaling trends can be improved with advanced retrieval, such as reranking. Also, data contamination has a large impact on language modeling evaluation, so we advocate applying strict decontamination for RAG perplexity evaluation.
+              As shown in Figure 6, we find scaling trends can be improved with advanced retrieval, such as reranking. In addition, we find data contamination has a large impact on language modeling evaluation, as shown in Figure 7, so we advocate applying strict decontamination for RAG perplexity evaluation.
             </p>
             <img src="static/images/analysis.png" alt="Analysis overview.">
           </div>
         </div>
       </div>
-      <!--/ Abstract. -->
+      <!--/ Future Directions. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Future Directions</h2>
+          <div class="content has-text-justified">
+            <p>
+              Our compute-optimal scaling trends indicate that retrieval-based language models (LMs) scale better than standalone LMs. 
+              Based on these findings, future research could focus on designing more effective training resource allocation strategies for retrieval-based LMs.
+            </p>
+            <p>
+              We demonstrate that storing trillion-token data in a datastore can effectively enhance language modeling and several downstream tasks. 
+              This approach introduces new challenges in serving retrieval-based language models (LMs) and highlights the need for efficient management of large-scale datastores coupled with LMs. 
+              Future work could utilize MassiveDS to test new efficient index structures and systems.
+            </p>
+            <p>
+              There has been ongoing discussion comparing retrieval-based LMs to long-context LMs. 
+              Our work relates to this in that we retrieve data from trillions of tokens and prepend it to the context, which can be seen as a method to achieve a 1-trillion-token context length through a sparse context selection process. 
+              On the other hand, using a long-context LM enables us to include more retrieved tokens within the context. 
+              We are curious about potential follow-ups in this direction.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Code and Data. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Reprduction and Datastore</h2>
