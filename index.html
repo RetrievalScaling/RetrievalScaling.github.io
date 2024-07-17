@@ -96,7 +96,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://drive.google.com/file/d/1FDtWyJTwgyk-CRg6L8Syi6WEuBZrgytE/view?usp=sharing"
+                <a href="https://retrievalscaling.github.io/paper.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -165,11 +165,11 @@
           <h2 class="title is-3">MassiveDS and our Datastore Scaling Pipeline</h2>
           <div class="content has-text-justified">
             <p>
-            <b>MassiveDS</b> MassiveDS is constructed from diverse data sources including both domain-specific data and massive web data,  so that it can benefit a wide range of tasks.
+            <b>MassiveDS</b> MassiveDS is constructed from diverse data sources including both domain-specific data and massive web data (Table 2), so that it can benefit a wide range of tasks.
             </p>
             <img src="static/images/massiveds.png" alt="MassiveDS overview." width="400" style="display: block; margin-left: auto; margin-right: auto;">
             <p>
-            We also designed an efficient scaling experiment pipeline that lets us understand scaling trends on an academic budget. The key idea is to reorder the operations to make the repeated ones cheaper. We prove its equivalence to the naive implementation.
+            We also designed an efficient scaling experiment pipeline (Figure 2) that lets us understand scaling trends on an academic budget. The key idea is to reorder the operations to make the repeated ones cheaper. We prove its equivalence to the naive implementation in Appendix A.
             </p>
             <img src="static/images/pipeline.png" alt="Pipeline overview.">
           </div>
@@ -183,23 +183,24 @@
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Results and Analysis</h2>
+          <h2 class="title is-3">Scaling Trends</h2>
           <div class="content has-text-justified">
-            <h4 class="title is-3">Datastore Scaling</h4>
+            <h4 class="title is-4">Datastore Scaling</h4>
             <p>
               Previous work has shown scaling datastore is helpful for language modeling, while it remains unknown how it applies to downstream tasks. We show MassiveDS not only helps language modeling but also downstream tasks including MMLU.
             </p>
             <img src="static/images/datastore_scaling_results.png" alt="Datastore Scaling overview.">
           </div>
           <div class="content has-text-justified">
-            <h4 class="title is-3">Compute-Optimal Scaling</h4>
+            <h4 class="title is-4">Compute-Optimal Scaling</h4>
             <p>
               We find using larger datastores can significantly improve performance for the same training compute. Figure 4 shows compute-optimal scaling curves with OLMo and Pythia on 4 downstream tasks.
             </p>
             <img src="static/images/compute_optimal_scaling_results.png" alt="Compute-Optimal Scaling overview.">
           </div>
+          <h2 class="title is-3">Analysis</h2>
           <div class="content has-text-justified">
-            <h4 class="title is-3">Retriever is Robust to Out-of-Distribution (OOD) Data in the Datastore</h4>
+            <h4 class="title is-4">Retriever is Robust to Out-of-Distribution (OOD) Data in the Datastore</h4>
             <p>
               We compare the performance of MassiveDS with single-domain datastores in Table 3. The results show that MassiveDS matches or outperforms all single-domain datastores.
             </p>
@@ -210,7 +211,7 @@
             <img src="static/images/retrieval_distribution.png" alt="Retrieval Distribution overview." width="400" style="display: block; margin-left: auto; margin-right: auto;">
           </div>
           <div class="content has-text-justified">
-            <h4 class="title is-3">Analysis on the Impact of Reranker and Data Contamination</h4>
+            <h4 class="title is-4">Analysis on the Impact of Reranker and Data Contamination</h4>
             <p>
               Scaling trends can be improved with advanced retrieval, such as reranking. Also, data contamination has a large impact on language modeling evaluation, so we advocate applying strict decontamination for RAG perplexity evaluation.
             </p>
